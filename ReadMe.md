@@ -1,8 +1,8 @@
-### Your Wildest Fantasy
+# Your Wildest Fantasy
 
-#- An app for those who wish to run a Fantasy sports league.
+## _An app for those who wish to run a Fantasy sports league._
 
-#- Minimum Viable Product:
+### *Minimum Viable Product:*
 
 	1 League
 		- the ability to create, customize, maintain/edit your own personal league
