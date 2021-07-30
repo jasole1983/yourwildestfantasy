@@ -3,14 +3,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-class Users (db.Model):
+class Users (UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column('id', db.Integer, primary_key = True)
     username = db.Column('username', db.String)
     full_name = db.Column('full_name', db.String)
     email = db.Column('email', db.String)
     hashed_password = db.Column('hashed_password', db.String)
+
     leagues = db.relationship('Leagues', back_populates='users' )
+    posts = db.relationship('Posts', back_populates='users')
+    comments = db.relationship('Comments', back_populates='users')
 
     @property
     def password(self):
@@ -27,7 +30,10 @@ class Users (db.Model):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'leagues': self.leagues,
+            'posts': self.posts,
+            'comments': self.comments,
         }
 
 
