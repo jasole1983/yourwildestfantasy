@@ -1,6 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
+import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+
+const store = configureStore();
 
 const rootReducer = combineReducers({
   session,
@@ -22,4 +25,4 @@ const configureStore = (preloadedState) => {
   return createStore(rootReducer, preloadedState, enhancer);
 };
 
-export default configureStore;
+export default store
