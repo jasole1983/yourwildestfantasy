@@ -5,8 +5,8 @@ class Posts (db.Model):
     __tablename__ = "posts"
     id = db.Column('id', db.Integer, primary_key = True)
     title = db.Column('title', db.VARCHAR(79))
-    body = db.Column('body', db.Text),
-    created_at = db.Column('created_at', db.Timestampz)
+    body = db.Column('body', db.Text)
+    created_at = db.Column('created_at', db.Date)
     userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
 
     users = db.relationship('Users', foreign_keys=userId, back_populates="posts")
@@ -37,10 +37,11 @@ class Posts (db.Model):
         }
     
 
-class Comments (Posts, db.Model):
+class Comments (db.Model):
     __tablename__ = "comments"
     id = db.Column('id', db.Integer, primary_key = True)
-    comment = db.Column('comment', db.Text)
+    body = db.Column('body', db.Text)
+    created_at = db.Column('created_at', db.Date)
     postId = db.Column('postId', db.Integer, db.ForeignKey('posts.id'))
     userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
 
@@ -50,7 +51,8 @@ class Comments (Posts, db.Model):
     def to_dict(self):
             return {
                 'id': self.id,
-                'comment': self.comment,
                 'postId': self.postId,
                 'userId': self.userId,
+                'body': self.body,
+                'created_at': self.created_at,
             }

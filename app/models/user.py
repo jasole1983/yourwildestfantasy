@@ -14,6 +14,7 @@ class Users (UserMixin, db.Model):
     leagues = db.relationship('Leagues', back_populates='users' )
     posts = db.relationship('Posts', back_populates='users')
     comments = db.relationship('Comments', back_populates='users')
+    rosters = db.relationship('Rosters', back_populates='users')
 
     @property
     def password(self):

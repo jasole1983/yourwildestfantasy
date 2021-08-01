@@ -5,11 +5,12 @@ from flask_login import UserMixin
 class Leagues (UserMixin, db.Model):
     __tablename__ = "leagues"
     id = db.Column('id', db.Integer, primary_key = True)
+    idp = db.Column('idp', db.Boolean)
     name = db.Column('name', db.String(75))
     hashed_password = db.Column('hashed password', db.String(255))
     conference = db.Column('conference', db.Boolean)
     division = db.Column('division', db.Integer)
-    max_team = db.Column('max_team', db.Integer)
+    max_roster = db.Column('max_roster', db.Integer)
     userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
 
     commissioner = db.Column('commissioner', db.Integer, db.ForeignKey('users.id'))
@@ -33,7 +34,7 @@ class Leagues (UserMixin, db.Model):
             'name': self.name,
             'conference': self.conference,
             'division': self.division,
-            'max_team': self.max_team,
+            'max_roster': self.max_roster,
             'userId': self.userId,
         }
 
@@ -51,21 +52,30 @@ class Schedule (db.Model):
     __tablename__ = "schedule"
     week = db.Column('week', db.Integer, primary_key = True)
     leagueId = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'), primary_key = True)
-    home_team_id = db.Column('home_team_id', db.Integer, db.ForeignKey('teams.id'), primary_key = True)
-    away_team_id = db.Column('away_team_id', db.Integer, db.ForeignKey('teams.id'))
+    home_roster_id = db.Column('home_roster_id', db.Integer, db.ForeignKey('rosters.id'), primary_key = True)
+    away_roster_id = db.Column('away_roster_id', db.Integer, db.ForeignKey('rosters.id'))
     home_score = db.Column('home_score', db.Integer)
     away_score = db.Column('away_score', db.Integer)
     home_wins = db.Column('home_wins', db.Boolean, nullable=True)
 
-    home = db.relationship('Teams', foreign_keys=home_team_id)
-    away = db.relationship('Teams', foreign_keys=away_team_id)
+    home = db.relationship('Rosters', foreign_keys=home_roster_id)
+    away = db.relationship('Rosters', foreign_keys=away_roster_id)
     
-    def to_dict_by_week(self, leagueId, week):
-        thisWeek = Schedule.query.filter_by(leagueId == self.leaguId, self.week == week).all()
+    # def to_dict_by_week(self, leagueId, week):
+    #     thisWeek = Schedule.query.filter_by(leagueId == self.leaguId, self.week == week).all()
+    #     return {
+    #         f'(self.leagueId)_(self.week)': {f'(match.home_roster_id)_(match.away_roster_id)':match for f'(match.home_roster_id)_(match.away_roster_id)',match in thisWeek}
+    #     }
+    def to_dict(self):
         return {
-            f'(self.leagueId)_(self.week)': {f'(match.home_team_id)_(match.away_team_id)':match for f'(match.home_team_id)_(match.away_team_id)',match in thisWeek}
+            'week': self.week,
+            'leagueId': self.leagueId,
+            'homeRosterId': self.home_roster_id,
+            'awayRosterId': self.away_roster_id,
+            'homeScore': self.home_score,
+            'awayScore': self.away_score,
+            'homeWins': self.home_wins,
         }
-
 
 
 
