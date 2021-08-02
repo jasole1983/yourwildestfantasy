@@ -1,12 +1,4 @@
 from .db import db
-from sqlalchemy.dialects.postgresql import BOOLEAN
-# from sqlalchemy.dialects.postgresql import ENUM
-
-# offPositions = ENUM("QB", "RB", "WR", "TE", "DST", "K", name="offensivePositions", metadata=metadata)
-# defPositions = ENUM("DL", "DT", "DE", "LB", "OLB", "MLB", "DB", "FS", "SS", "S", "CB", name="defensivPositions", metadata=metadata)
-# plyrStatus = ENUM("IR", "R", "FA", "D", "P", "S", "HO", "COV", "LOK", name="playerStatus", metadata=metadata)
-# conferences = ENUM("AFC", "NFC", name="conference", metadata=metadata)
-# divisions = ENUM("WEST", "SOUTH", "EAST", "NORTH", name="divisions", metadata=metadata)
 
 
 class RosterPositionSettings (db.Model):
@@ -43,6 +35,32 @@ class RosterPositionSettings (db.Model):
                         }
         }
 
+
+class Rosters (db.Model):
+    __tablename__ = "rosters"
+    id = db.Column('id', db.Integer, primary_key = True)
+    name = db.Column('name', db.String)
+    leagueId = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'))
+    userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
+    proj_pts = db.Column('proj_pts', db.Integer)
+    seas_pts = db.Column('seas_pts', db.Integer)
+    abbr = db.Column('abbr', db.VARCHAR(5))
+
+    leagues = db.relationship('Leagues', foreign_keys=leagueId)
+    users = db.relationship('Users', foreign_keys=userId, back_populates='rosters')
+
+    def to_dict(self):
+        players = Players.query.filter(Players.rosterId == self.rosterId).all()
+        return {
+            'id': self.id,
+            'name': self.name,
+            'leagueId': self.leagueId,
+            'userId': self.userId,
+            'proj_pts': self.proj_pts,
+            'seas_pts': self.seas_pts,
+            'abbr': self.abbr,
+            'players': players,
+        }
 
 class Players (db.Model):
     __tablename__ = "players"
@@ -82,33 +100,6 @@ class Players (db.Model):
             'leagueId': self.leagueId,            
         }
 
-class Rosters (db.Model):
-    __tablename__ = "teams"
-    id = db.Column('id', db.Integer, primary_key = True)
-    name = db.Column('name', db.String)
-    leagueId = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'))
-    userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
-    proj_pts = db.Column('proj_pts', db.Integer)
-    seas_pts = db.Column('seas_pts', db.Integer)
-    abbr = db.Column('abbr', db.VARCHAR(5))
-
-    leagues = db.relationship('Leagues', foreign_keys=leagueId)
-    users = db.relationship('Users', foreign_keys=userId, back_populates='rosters')
-
-    def to_dict(self):
-        players = Players.query.filter(Players.rosterId == self.rosterId).all()
-        return {
-            'id': self.id,
-            'name': self.name,
-            'leagueId': self.leagueId,
-            'userId': self.userId,
-            'proj_pts': self.proj_pts,
-            'seas_pts': self.seas_pts,
-            'abbr': self.abbr,
-            'players': players,
-        }
-
-
 
 class NFL (db.Model):
     __tablename__ = "NFL"
@@ -116,7 +107,6 @@ class NFL (db.Model):
     AFC = db.Column('AFC', db.BOOLEAN) 
     division = db.Column('division', db.VARCHAR(5))
     team_name = db.Column('team_name', db.VARCHAR(30))
-    city = db.Column('city', db.VARCHAR(30))
     abbr = db.Column('abbr', db.VARCHAR(3))
 
     def to_dict(self):
@@ -125,6 +115,5 @@ class NFL (db.Model):
             'conference': self.AFC,
             'division': self.division,
             'team_name': self.team_name,
-            'city': self.city,
             'abbr': self.abbr,
         }

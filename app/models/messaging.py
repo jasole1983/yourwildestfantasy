@@ -1,5 +1,5 @@
 from .db import db
-from .user import Users 
+ 
 
 class Posts (db.Model):
     __tablename__ = "posts"
@@ -25,12 +25,10 @@ class Posts (db.Model):
             return all_comments
 
     def to_dict(self):
-        user = Users.query.get(self.userId)
         return {
             'id': self.id,
             'title': self.title,
             'body': self.body,
-            'user': user.username,
             'userId': self.userId,
             'createdAt': self.created_at,
             'all_comments': self.all_comments_by_post()
