@@ -56,7 +56,7 @@ export default function Welcome() {
                   </h1>                  
                 </Xsign>
             </div>
-            <BackgroundSlider images={[img1, img2, img3, img5, img6, img9, img10, img11]} duration={10} transition={2} />
+            <BackgroundSlider images={[img1, img2, img3, img5, img6, img9, img10, img11]} opacity={85} duration={10} transition={2} />
         </>
     )
 }

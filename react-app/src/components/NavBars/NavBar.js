@@ -49,12 +49,12 @@ export default function NavBar () {
               </NavLink>
             </li>
             <li>
-              <button className='navbar_btn' onClick={(e) => handleClick(e)} side="login">
+              <button className='navbar_btn' onClick={handleClick('login')} side="login">
                 Login
               </button>
             </li>
             <li>
-              <button className='navbar_btn'onClick={(e) => handleClick(e)} side="signup">
+              <button className='navbar_btn'onClick={handleClick('signum')} side="signup">
                 Sign Up
               </button>
             </li>
@@ -70,7 +70,7 @@ export default function NavBar () {
         </nav>
           {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-              <LoginSignup side={launchModal}/>
+              <LoginSignup setShowModal={setShowModal}/>
           </Modal> 
         )}
     
