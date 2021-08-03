@@ -16,6 +16,7 @@ class Leagues (UserMixin, db.Model):
     commissioner = db.Column('commissioner', db.Integer, db.ForeignKey('users.id'))
     players = db.relationship('Players', back_populates='league')
     users = db.relationship('Users', back_populates='leagues')
+    posts = db.relationship('Posts', back_populates='league')
 
     @property
     def password(self):

@@ -1,0 +1,13 @@
+.nav_tab_cont {
+    display: flex;
+    flex-flow: row;
+    width: 75%;
+    height: 35px;
+    justify-content: space-between;
+}
+
+.main_focus {
+    width: 70%;
+    height: 1000px;
+    border: .7rem solid red
+}
