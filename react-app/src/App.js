@@ -8,7 +8,7 @@ import NavBarLogged from './components/NavBars';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 import User from './components/User';
-import { authenticate } from './store/session';
+import { authenticate } from './store/slices/session';
 import Welcome from './components/Welcome';
 import HomePage from './components/Home';
 

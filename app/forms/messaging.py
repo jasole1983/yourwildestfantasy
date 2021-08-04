@@ -9,6 +9,7 @@ class NewPost(Form):
     body = TextAreaField(u'Body', validators=[validators.InputRequired()])
     userId = HiddenField('User', validators=[validators.InputRequired])
     leagueId= HiddenField('League', validators=[validators.InputRequired])
+    index = HiddenField('Index', validators=[validators.InputRequired])
 
     def validate_body(form, field):
         if len(field.data) > 1000:
@@ -19,5 +20,14 @@ class NewPost(Form):
             raise ValidationError("50 character limit exceeded")
 
 
-class newComment(Form):
-    bod 
+
+class NewComment(Form):
+    postId = HiddenField('Post', validators=[validators.InputRequired])
+    body = TextAreaField(u'Body', validators=[validators.InputRequired()])
+    userId = HiddenField('User', validators=[validators.InputRequired])
+    leagueId= HiddenField('League', validators=[validators.InputRequired])
+    index = HiddenField('Index', validators=[validators.InputRequired])
+
+    def validate_body(form, field):
+        if len(field.data) > 1000:
+            raise ValidationError("1000 character limit exceeded")
