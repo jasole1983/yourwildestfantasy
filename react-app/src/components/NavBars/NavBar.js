@@ -5,38 +5,12 @@ import LogoutButton from '../auth/LogoutButton';
 import { Modal } from '../../context/Modal'
 import LoginSignup from '../auth/LoginSignup'
 import './NavBar.css'
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-export default function NavBar () {
+export default function NavBarUnlogged () {
 
   const [showModal, setShowModal] = useState(false)
-  const [launchModal, setLaunchModal] = useState('')
-                    
-  const dispatch = useDispatch()
-
-  const handleClick = (e) => {
-    // e.preventDefault()
-    setLaunchModal(e.target.side)
-    console.log(launchModal)
-  }
-  
-  useEffect( () => {
-    
-    if (launchModal === 'login'){
-      dispatch(setShowModal(true))
-      setTimeout(() => (
-        dispatch(setLaunchModal(''))
-      ), 2000)
-    }
-    if (launchModal === 'signup'){
-      dispatch(setShowModal(true))
-      setTimeout(() => (
-        dispatch(setLaunchModal(''))
-      ), 2000)
-    }
-
-
-  }, [dispatch, showModal, launchModal])
+ 
 
 
   return (
@@ -49,12 +23,12 @@ export default function NavBar () {
               </NavLink>
             </li>
             <li>
-              <button className='navbar_btn' onClick={handleClick('login')} side="login">
+              <button className='navbar_btn' onClick={() => setShowModal(true)}>
                 Login
               </button>
             </li>
             <li>
-              <button className='navbar_btn'onClick={handleClick('signum')} side="signup">
+              <button className='navbar_btn'onClick={() => setShowModal(true)}>
                 Sign Up
               </button>
             </li>

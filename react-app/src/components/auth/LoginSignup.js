@@ -1,7 +1,8 @@
 import ReactCardFlip from 'react-card-flip'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
+import './LoginSIgnup.css'
 
 export default function LoginSignup() {
 
@@ -12,15 +13,20 @@ export default function LoginSignup() {
         setIsFlipped( !isFlipped )
     }
     return (
-        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-          <div className="login_cont">
-            <LoginForm />
-            <button onClick={handleClick}>SignUp</button>
-          </div>
-          <div className="signup_cont">
-            <SignUpForm />
-            <button onClick={handleClick}>Login</button>
-          </div>
-        </ReactCardFlip>
+
+              <div className= "outter modal cont">
+                <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+                  <div className="signup_cont">
+                    <SignUpForm />
+                    <span>Already have an account?</span>
+                    <button className="submit_btn signup" onClick={handleClick}>SignUp</button>
+                  </div>
+                  <div className="login_cont">
+                    <LoginForm />
+                    <span>Don't have an account yet?</span>
+                    <button className="submit_btn login" onClick={handleClick}>Login</button>
+                  </div>
+                </ReactCardFlip>
+              </div>
     )
 }

@@ -3,12 +3,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBars/NavBar';
+import NavBarUnlogged from './components/NavBars/NavBar';
+import NavBarLogged from './components/NavBars';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
+// import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Welcome from './components/Welcome';
+import HomePage from './components/Home';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,13 +30,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {loaded ? <NavBarLogged /> : <NavBarUnlogged />}
       <Switch>
         <Route path='/welcome' exact={true}>
           <Welcome />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        <ProtectedRoute path='/home' exact={true} >
+          <HomePage/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />

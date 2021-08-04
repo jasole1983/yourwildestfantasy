@@ -9,7 +9,7 @@ class Posts (db.Model):
     body = db.Column('body', db.Text)
     created_at = db.Column('created_at', db.Date)
     userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
-    leagueId = db.Column('leagueId', db.Integer, db.FOreignKey('leagues.id'))
+    leagueId = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'))
     index = db.Column('index', db.Integer)
     
     users = db.relationship('Users', foreign_keys=userId, back_populates="posts")
@@ -80,7 +80,7 @@ class Comments (db.Model):
     created_at = db.Column('created_at', db.Date)
     postId = db.Column('postId', db.Integer, db.ForeignKey('posts.id'))
     userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
-    index = db.Column('userId', db.Integer)
+    index = db.Column('index', db.Integer)
 
     posts = db.relationship('Posts', foreign_keys=postId)
     users = db.relationship('Users', foreign_keys=userId)

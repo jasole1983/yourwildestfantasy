@@ -12,7 +12,7 @@ class Users (UserMixin, db.Model):
     hashed_password = db.Column('hashed_password', db.String)
     
 
-    leagues = db.relationship('Leagues', back_populates='users', secondary="UsersLeagues" )
+    leagues = db.relationship('Leagues', back_populates='users' )
     posts = db.relationship('Posts', back_populates='users')
     comments = db.relationship('Comments', back_populates='users')
     rosters = db.relationship('Rosters', back_populates='users')
@@ -39,8 +39,8 @@ class Users (UserMixin, db.Model):
         }
 
 
-class UsersLeagues (db.Model):
-    __tablename__ = "users_leagues"
-    userid = db.Column('userId', db.Integer, db.ForeignKey('users.id'), primary_key = True)
-    leagueid = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'), primary_key = True)
+# class UsersLeagues (db.Model):
+#     __tablename__ = "users_leagues"
+#     userid = db.Column('userId', db.Integer, db.ForeignKey('users.id'), primary_key = True)
+#     leagueid = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'), primary_key = True)
 

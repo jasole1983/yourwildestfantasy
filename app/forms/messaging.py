@@ -19,4 +19,5 @@ class NewPost(Form):
             raise ValidationError("50 character limit exceeded")
 
 
-class newComment
+class newComment(Form):
+    bod 

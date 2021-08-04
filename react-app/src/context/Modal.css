@@ -20,7 +20,5 @@
   
   #modal-content {
     position: absolute;
-    padding: 30px;
-    padding-right: 50px;
     border-radius: 10%;
   }
