@@ -48,6 +48,9 @@ def create_new_post(leagueid):
 @post_routes.route('/<int:postid>', methods=['GET'])
 @login_required
 def get_this_post(postid):
+    '''
+    GET a specific post via PK
+    '''
     post = Posts.query.get(postid)
     if post:
         return {'post': post.to_dict()}

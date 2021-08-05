@@ -106,7 +106,7 @@ class NFL (db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
     AFC = db.Column('AFC', db.BOOLEAN) 
     division = db.Column('division', db.VARCHAR(5))
-    team_name = db.Column('team_name', db.VARCHAR(30))
+    name = db.Column('team_name', db.VARCHAR(30))
     abbr = db.Column('abbr', db.VARCHAR(3))
 
     def to_dict(self):

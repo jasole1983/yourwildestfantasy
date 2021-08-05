@@ -16,13 +16,14 @@ class Posts (db.Model):
     comments = db.relationship('Comments', back_populates='posts')
     league = db.relationship('Leagues', foreign_keys=leagueId, back_populates="posts")
 
-    def __init__(self, title, body, leagueId, userId):
+    def __init__(self, title, body, leagueId, userId, index):
         self.title = title
         self.body = body
         self.leagueId = leagueId
         self.userId = userId
         self.created_at = datetime.now(tz=None)
-        self.index = self.get_len_posts() + 1
+        # self.index = self.get_len_posts() + 1
+        self.index = index
 
     @property
     def all_comments(self):
@@ -85,12 +86,13 @@ class Comments (db.Model):
     posts = db.relationship('Posts', foreign_keys=postId)
     users = db.relationship('Users', foreign_keys=userId)
 
-    def __init__(self, body, postId, userId):
+    def __init__(self, body, postId, userId, index):
         self.body = body
         self.postId = postId
         self.userId = userId
         self.created_at = datetime.now(tz=None)
-        self.index = self.get_len_comments(self.postId) + 1
+        # self.index = self.get_len_comments(self.postId)
+        self.index = index
 
 
     @property
