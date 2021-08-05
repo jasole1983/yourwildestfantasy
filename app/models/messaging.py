@@ -7,7 +7,7 @@ class Posts (db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
     title = db.Column('title', db.VARCHAR(50))
     body = db.Column('body', db.Text)
-    created_at = db.Column('created_at', db.Date)
+    created_at = db.Column('created_at', datetime.thrusing )
     userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
     leagueId = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'))
     index = db.Column('index', db.Integer)

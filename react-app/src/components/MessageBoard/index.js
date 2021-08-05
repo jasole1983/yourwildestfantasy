@@ -1,19 +1,22 @@
-import { useDispatch, useSelector } from "react-redux"
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import { fetchLeaguePosts } from "../../store/slices/Postslice"
-import { selectComments } from "../../store/slices/CommentSlice"
+import { useSelector, useDispatch } from "react-redux"
+import { useEffect } from "react"
+// import { useParams } from "react-router-dom"
+import { fetchLeaguePosts, selectPosts } from "../../store/slices/Postslice"
+import { selectComments, fetchPostsComments  } from "../../store/slices/CommentSlice"
+import { List } from 'rsuite';
+
+
 
 export default function MessageBoard() {
 
-    const { posts } = useSelector(state => state.posts)
-    const { comments } = useSelector(state => state.comments)
-    const { leagueId } = useParams()
+    const { posts } = useSelector(selectPosts)
+    const { comments } = useSelector(selectComments)
+    // const { leagueId } = useParams()
     
     const dispatch = useDispatch()
     useEffect( () => {
         dispatch(fetchLeaguePosts())
-
+        dispatch(fetchPostsComments())
     }, [])
 
 
