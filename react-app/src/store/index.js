@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import session from './slices/session'
 import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
-import postReducer from './slices/messages'
+import postReducer from './slices/Postslice'
 import commentReducer from './slices/CommentSlice'
 
 

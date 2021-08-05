@@ -43,6 +43,8 @@ export const commentSlice = createSlice({
 })
 export const { addOnePostComment, removePostComment, getPostComments, clearComState } = commentSlice.actions
 
+export const selectComments = ({ comments }) => comments
+
 export default commentSlice.reducer
 
 

@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { fetchLeaguePosts } from "../../store/slices/messages"
-
+import { fetchLeaguePosts } from "../../store/slices/Postslice"
+import { selectComments } from "../../store/slices/CommentSlice"
 
 export default function MessageBoard() {
 
     const { posts } = useSelector(state => state.posts)
     const { comments } = useSelector(state => state.comments)
     const { leagueId } = useParams()
-
+    
     const dispatch = useDispatch()
     useEffect( () => {
         dispatch(fetchLeaguePosts())
