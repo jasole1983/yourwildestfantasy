@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
-import session from './session'
+import session from './slices/session'
 import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
+import postReducer, { addOne, remove, getAll, clearState }  from './slices/messages';
 
 
 const rootReducer = combineReducers({
   session,
+  postReducer,
 });
 
 export default function configureAppStore(preloadedState) {

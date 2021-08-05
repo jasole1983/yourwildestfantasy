@@ -1,0 +1,30 @@
+.signup_cont {
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 500px;
+    background-color: midnightblue;
+    border-radius: 3rem;
+    box-shadow: ;
+    position: fixed;
+    align-items: baseline;
+}
+
+div#modal-content {
+    width: 400px;
+    height: 500px;
+    padding: 0;
+    justify-content: center;;
+}
+
+.outter.modal.cont {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+button.submit_btn {
+    align-self: flex-end;
+    
+}

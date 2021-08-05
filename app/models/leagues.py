@@ -12,8 +12,8 @@ class Leagues (UserMixin, db.Model):
     division = db.Column('division', db.Integer)
     max_roster = db.Column('max_roster', db.Integer)
     userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
+    commissioner = db.Column('commissioner', db.Integer)
 
-    commissioner = db.Column('commissioner', db.Integer, db.ForeignKey('users.id'))
     players = db.relationship('Players', back_populates='league')
     users = db.relationship('Users', back_populates='leagues')
     posts = db.relationship('Posts', back_populates='league')

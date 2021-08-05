@@ -4,7 +4,7 @@ import { NavLink, Route, Switch } from "react-router-dom";
 
 export default function HomePage() {
 
-
+    const [tabStatus, setTabStatus] = useState(0)
 
 
 

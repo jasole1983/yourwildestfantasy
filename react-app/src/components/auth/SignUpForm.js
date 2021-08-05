@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { signUp } from '../../store/slices/session';
+import './LoginSIgnup.css'
+
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -44,14 +46,14 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={onSignUp}>
-      <div>
+      <div className="errors_cont">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
       <div>
-        <label>User Name</label>
         <input
+          placeholder="Username"
           type='text'
           name='username'
           onChange={updateUsername}
@@ -59,8 +61,8 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Email</label>
         <input
+          placeholder="Email"
           type='text'
           name='email'
           onChange={updateEmail}
@@ -68,8 +70,8 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Password</label>
         <input
+          placeholder="Password"
           type='password'
           name='password'
           onChange={updatePassword}
@@ -77,8 +79,8 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
         <input
+          placeholder='Confirm Password'
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
