@@ -10,10 +10,12 @@ class Users (UserMixin, db.Model):
     full_name = db.Column('full_name', db.String)
     email = db.Column('email', db.String)
     hashed_password = db.Column('hashed_password', db.String)
+    
 
-    leagues = db.relationship('Leagues', back_populates='users' )
+    leagues = db.relationship('Leagues', back_populates='users', secondary="UsersLeagues" )
     posts = db.relationship('Posts', back_populates='users')
     comments = db.relationship('Comments', back_populates='users')
+    rosters = db.relationship('Rosters', back_populates='users')
 
     @property
     def password(self):
@@ -42,5 +44,3 @@ class UsersLeagues (db.Model):
     userid = db.Column('userId', db.Integer, db.ForeignKey('users.id'), primary_key = True)
     leagueid = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'), primary_key = True)
 
-    users = db.relationship('Users', foreign_keys=userid)
-    leagues = db.relationship('Leagues', foreign_keys=leagueid)

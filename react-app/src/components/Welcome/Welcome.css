@@ -1,0 +1,29 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap'); */
+
+
+font-family: oacufucil
+
+
+.intro_div h1 {
+    color: hsl(342, 87%, 34%);
+    font: pacifico;
+    font-size: 5rem;
+    font-weight: 700;
+    font-family: pacifico;
+    /* position: relative; */
+    /* text-shadow: ; */
+
+}
+
+.intro_div {
+    position: absolute;
+    border: red;
+    left: 30%;
+    top: 50%;
+    justify-content:;
+
+}
+
+  @keyframes flicker {
+
+  }

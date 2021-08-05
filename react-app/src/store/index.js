@@ -1,28 +1,37 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { combineReducers } from 'redux';
 import session from './session'
-import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
+import logger from 'redux-logger'
 
-const store = configureStore();
 
 const rootReducer = combineReducers({
   session,
 });
 
+export default function configureAppStore(preloadedState) {
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    preloadedState,
+    enhancers: [],
 
-let enhancer;
+  })
 
-if (process.env.NODE_ENV === 'production') {
-  enhancer = applyMiddleware(thunk);
-} else {
-  const logger = require('redux-logger').default;
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+  return store
 }
+// let enhancer;
 
-const configureStore = (preloadedState) => {
-  return createStore(rootReducer, preloadedState, enhancer);
-};
+// if (process.env.NODE_ENV === 'production') {
+//   enhancer = applyMiddleware(thunk);
+// } else {
+//   const logger = require('redux-logger').default;
+//   const composeEnhancers =
+//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//   enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+// }
 
-export default store
+// const configureStore = (preloadedState) => {
+//   return createStore(rootReducer, preloadedState, enhancer);
+// };
+
+
