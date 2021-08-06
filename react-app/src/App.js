@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import NavBarUnlogged from './components/NavBars/NavBar';
-// import NavBarLogged from './components/NavBars';
+import NavBarLogged from './components/NavBars';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 import User from './components/User';
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBarUnlogged />
+    {( loaded && <NavBarLogged /> ) || <NavBarUnlogged />}
       <Switch>
         <Route path='/welcome' exact={true}>
           <Welcome />

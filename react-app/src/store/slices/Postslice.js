@@ -1,46 +1,50 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchLeaguePosts = createAsyncThunk(
-    "posts/getPosts", async (dispatch, getState) => {
-        return await fetch("/api/posts/").then(
-            (res) => res.json()
-        );
-
+export const getPosts = createAsyncThunk(
+    "posts/getPosts", async () => {
+        return await fetch("/api/posts/").then((res) => res.json());
     }
 );
-
-const postSlice = createSlice({
-    name: "posts",
-    initialState: {
-        posts: [],
-        status: null,
-    },
-    reducers: {
-        addOneLeaguePost: (state, action) => (
-            state.posts.push(action.payload)
-        ),
-        removeLeaguePost: (state, action) => (
-            state.posts.filter((post) => post.id !== action.payload.id)
-        ),
-        getLeaguePosts: (state, action) => (
-            state.posts = action.payload.map(post=> post) 
-        ),
-        clearState: (state) => (
-            state = {}
-        ),
-    },
-    extraReducers: {
-        [fetchLeaguePosts.pending]: (state, action) => {
-            state.status = "loading"
+export const removePost = createAsyncThunk(
+    "posts/removePost", async (post) => {
+        returm await fetch(`/api/posts/remove/${post.id}`, {
+                                    method: 'DELETE',
+                                    headers: { 'Content-Type': 'application/json'},
+                                    body: JSON.stringify(post),
+                                    }).then((res) => res.json())});
+    
+export const     async () => {
+        return await fetch()
+    }
+    )
+export const addOnePost = createAsyncThunk(=> (
+        state.posts.push(action.payload)
+        )
+    
+    const postSlice = createSlice({
+        name: "posts",
+        initialState: {
+            posts: [],
+            status: null,
         },
-        [fetchLeaguePosts.resolved]: (state, action) => {
-            state.status = "success";
-            state.posts = action.payload.map(post=> post)
-        },
-        [fetchLeaguePosts.rejected]: (state, action) => {
-            state.status = "failed"
-        }
-    },
+        reducers: {
+                clearState: (state) => (
+                    state = {}
+                    ),
+                },
+                extraReducers: {
+                    [fetchLeaguePosts.pending]: (state) => {
+                        state.status = "loading"
+                    },
+                    [fetchLeaguePosts.resolved]: (state, action) => {
+                        state.status = "success";
+                        state.posts = action.payload.map(post=> post)
+                    },
+                    [fetchLeaguePosts.rejected]: (state, action) => {
+                        state.status = "failed"
+                    }
+                    state.posts.filter((post) => post.id !== payload.id)
+                },
         
     // dispatch(fetchLeaguePosts())
 })      

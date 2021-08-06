@@ -8,7 +8,7 @@ class Posts (db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
     title = db.Column('title', db.VARCHAR(50))
     body = db.Column('body', db.Text)
-    created_at = db.Column('created_at', DATETIME )
+    created_at = db.Column('created_at', db.Date )
     userId = db.Column('userId', db.Integer, db.ForeignKey('users.id'))
     leagueId = db.Column('leagueId', db.Integer, db.ForeignKey('leagues.id'))
     index = db.Column('index', db.Integer)
@@ -71,13 +71,13 @@ class Posts (db.Model):
             'body': self.body,
             'userId': self.userId,
             'createdAt': self.created_at,
-            'all_comments': self.all_comments_by_post()
+            # 'all_comments': self.all_comments_by_post()
         }
     
 
 class Comments (db.Model):
     __tablename__ = "comments"
-    id = db.Column('id', db.Integer, primary_key = True)
+    id = db.Column('id', db.Integer, primary_key=True)
     body = db.Column('body', db.Text)
     created_at = db.Column('created_at', db.Date)
     postId = db.Column('postId', db.Integer, db.ForeignKey('posts.id'))
@@ -87,13 +87,13 @@ class Comments (db.Model):
     posts = db.relationship('Posts', foreign_keys=postId)
     users = db.relationship('Users', foreign_keys=userId)
 
-    def __init__(self, body, postId, userId, index):
+    def __init__(self, body, postId, userId):
         self.body = body
         self.postId = postId
         self.userId = userId
         self.created_at = datetime.now(tz=None)
-        # self.index = self.get_len_comments(self.postId)
-        self.index = index
+        self.index = self.get_len_comments(self.postId) + 1
+        # self.index = index
 
 
     @property
@@ -110,7 +110,7 @@ class Comments (db.Model):
         return all_comments
     @classmethod
     def get_len_comments(Class, postId):
-        return Class.get_comments_by_post(postId)
+        return len(Class.get_comments_by_post(postId))
 
     def get_parent_post(self):
         post = Posts.query.get(self.postId)
@@ -123,4 +123,6 @@ class Comments (db.Model):
                 'userId': self.userId,
                 'body': self.body,
                 'created_at': self.created_at,
+                'index': self.index,
+                'cin': self.cin
             }

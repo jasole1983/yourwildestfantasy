@@ -15,7 +15,7 @@ export default function HomePage() {
     return (
         <>
             <body>
-                {/* <NavBarLogged /> */}
+               
                 <header><h1>LeagueName</h1></header>    
                 <ul className="nav_tab_cont">
                     <li className="TAB one">

@@ -27,14 +27,14 @@ export const commentSlice = createSlice({
     },
     extraReducers: {
         [fetchPostComments.pending]: (state) => {
-            state.stat = "Loading" 
+            state.status = "Loading" 
         },
         [fetchPostComments.resolved]: (state, action) => {
-            state.stat = "Success";
+            state.status = "Success";
             state.comments = action.payload
         },
         [fetchPostComments.rejected]: (state, action) => {
-            state.stat = "Failed"
+            state.status= "Failed"
             
         }
     }
