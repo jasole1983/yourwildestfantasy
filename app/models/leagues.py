@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy import inspect
 
 class Leagues (UserMixin, db.Model):
     __tablename__ = "leagues"
@@ -30,14 +31,17 @@ class Leagues (UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'conference': self.conference,
-            'division': self.division,
-            'max_roster': self.max_roster,
-            'userId': self.userId,
-        }
+        return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_att}
+
+    # def to_dict(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'conference': self.conference,
+    #         'division': self.division,
+    #         'max_roster': self.max_roster,
+    #         'userId': self.userId,
+    #     }
 
 
 class PlayersLeagues (db.Model):

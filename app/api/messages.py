@@ -20,7 +20,7 @@ def all_posts():
 
 @post_routes.route('/<int:leagueid>')
 @login_required
-def posts_by_league(leagueid):
+def posts_by_league(leagueid): 
     '''
     GET all posts associated w/ a specific league
     '''
@@ -48,6 +48,9 @@ def create_new_post(leagueid):
 @post_routes.route('/<int:postid>', methods=['GET'])
 @login_required
 def get_this_post(postid):
+    '''
+    GET a specific post via PK
+    '''
     post = Posts.query.get(postid)
     if post:
         return {'post': post.to_dict()}
@@ -113,7 +116,7 @@ def alter_comment(postid, commentid):
         for key, value in request.form:
             setattr(comment, key, value)
         db.session.commit()
-        return ('card': card.to_dict())
+        return {comment: comment.to_dict()}
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -134,7 +137,7 @@ def create_comment(postid):
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@comment_routes.route('/<int:postid>/comments/<int:commentid>', methods=['DELETE'])
+@comment_routes.route('/<int:postid>/remove/<int:commentid>', methods=['DELETE'])
 @login_required
 def delete_comment(postid, commentid):
     '''

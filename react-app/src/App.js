@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
 import NavBarUnlogged from './components/NavBars/NavBar';
-import NavBarLogged from './components/NavBars';
+// import NavBarLogged from './components/NavBars';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 import User from './components/User';
@@ -16,6 +14,7 @@ import HomePage from './components/Home';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  // const { user }= useSelector(state => state.session.user)
 
   useEffect(() => {
     (async() => {
@@ -28,9 +27,10 @@ function App() {
     return null;
   }
 
+
   return (
     <BrowserRouter>
-      {loaded ? <NavBarLogged /> : <NavBarUnlogged />}
+      <NavBarUnlogged />
       <Switch>
         <Route path='/welcome' exact={true}>
           <Welcome />

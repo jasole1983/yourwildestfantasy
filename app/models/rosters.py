@@ -22,18 +22,18 @@ class RosterPositionSettings (db.Model):
                                 'max_rest': setting.max_rost,
                                 }} for setting in leagueSettings]
 
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'leagueId': self.leagueId,
-            'position': self.position,
-            self.position: {
-                        'min_start': self.min_start,
-                        'max_start': self.max_start,
-                        'min_rost': self.min_rost,
-                        'max_rost': self.max_rost,
-                        }
-        }
+    # def to_dict(self):
+    #     return {
+    #         'id': self.id,
+    #         'leagueId': self.leagueId,
+    #         'position': self.position,
+    #         self.position: {
+    #                     'min_start': self.min_start,
+    #                     'max_start': self.max_start,
+    #                     'min_rost': self.min_rost,
+    #                     'max_rost': self.max_rost,
+    #                     }
+    #     }
 
 
 class Rosters (db.Model):
@@ -106,7 +106,7 @@ class NFL (db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
     AFC = db.Column('AFC', db.BOOLEAN) 
     division = db.Column('division', db.VARCHAR(5))
-    team_name = db.Column('team_name', db.VARCHAR(30))
+    name = db.Column('name', db.VARCHAR(30))
     abbr = db.Column('abbr', db.VARCHAR(3))
 
     def to_dict(self):
@@ -114,6 +114,6 @@ class NFL (db.Model):
             'id': self.id,
             'conference': self.AFC,
             'division': self.division,
-            'team_name': self.team_name,
+            'name': self.team_name,
             'abbr': self.abbr,
         }
