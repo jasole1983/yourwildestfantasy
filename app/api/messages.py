@@ -91,7 +91,7 @@ def delete_post(postid):
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@comment_routes.route('/<int:postid>/comments/<int:commentid>', methods=['GET'])
+@comment_routes.route('/posts/<int:postId>/<int:commentId>', methods=['GET'])
 @login_required
 def get_comment(postid, commentid):
     '''
@@ -120,7 +120,7 @@ def alter_comment(postid, commentid):
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@comment_routes.route('/<int:postid>/comments/create', methods=['POST'])
+@comment_routes.route('/<int:postid>/create', methods=['POST'])
 @login_required
 def create_comment(postid):
     '''
@@ -137,9 +137,9 @@ def create_comment(postid):
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@comment_routes.route('/<int:postid>/remove/<int:commentid>', methods=['DELETE'])
+@comment_routes.route('/remove/<int:commentid>', methods=['DELETE'])
 @login_required
-def delete_comment(postid, commentid):
+def delete_comment(commentid):
     '''
     DELETE route to remove a specific comment from a specific account
     '''
