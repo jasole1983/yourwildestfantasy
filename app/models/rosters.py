@@ -22,18 +22,18 @@ class RosterPositionSettings (db.Model):
                                 'max_rest': setting.max_rost,
                                 }} for setting in leagueSettings]
 
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'leagueId': self.leagueId,
-            'position': self.position,
-            self.position: {
-                        'min_start': self.min_start,
-                        'max_start': self.max_start,
-                        'min_rost': self.min_rost,
-                        'max_rost': self.max_rost,
-                        }
-        }
+    # def to_dict(self):
+    #     return {
+    #         'id': self.id,
+    #         'leagueId': self.leagueId,
+    #         'position': self.position,
+    #         self.position: {
+    #                     'min_start': self.min_start,
+    #                     'max_start': self.max_start,
+    #                     'min_rost': self.min_rost,
+    #                     'max_rost': self.max_rost,
+    #                     }
+    #     }
 
 
 class Rosters (db.Model):

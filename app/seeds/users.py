@@ -1,4 +1,4 @@
-from app.models import db, Users, Leagues, Posts, Comments
+from app.models import db, Users
 from app.models.rosters import NFL
 
 

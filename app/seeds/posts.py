@@ -34,9 +34,6 @@ def seed_posts():
 
     db.session.add(demoLeague)
     db.session.add_all(items_to_seed)
-    db.session.commit()
-
-def seed_comments():
 
     oneone = Comments(
         body='witty comment the first', postId=1, userId=2, index=1
@@ -65,8 +62,6 @@ def seed_comments():
     ]
  
     db.session.add_all(listOfStuff)
-
-
     db.session.commit()
 
 
@@ -75,9 +70,7 @@ def seed_comments():
 def undo_posts():
         db.session.execute('TRUNCATE leagues RESTART IDENTITY CASCADE;')
         db.session.execute('TRUNCATE posts RESTART IDENTITY CASCADE;')
-        
-        db.session.commit()
-        
-def undo_comments():        
         db.session.execute('TRUNCATE comments RESTART IDENTITY CASCADE;')
+        
         db.session.commit()
+        

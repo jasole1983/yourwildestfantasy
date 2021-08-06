@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchPostComments = createAsyncThunk(
-    "comments/getComments", async (dispatch, getState) => {
-        return await fetch("/api/posts/:leagueId/comments/:postId").then(
+    "comments/getComments", async () => {
+        return await fetch("/api/comments/").then(
             (res) => res.json()
         );
-
     }
 );
 
