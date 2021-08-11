@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { NavLink, Route, Switch } from "react-router-dom";
+import { getPosts } from "../../store/slices/Postslice";
+import { getComments } from "../../store/slices/Commentslice";
+import { useDispatch } from "react-redux";
 
 
 export default function HomePage() {
+    const dispatch = useDispatch()
+    // const [tabStatus, setTabStatus] = useState(0)
 
-    const [tabStatus, setTabStatus] = useState(0)
-
-
+    useEffect(() => {
+        dispatch(getPosts())
+        dispatch(getComments())
+    }, [dispatch])
 
 
 
@@ -15,7 +21,7 @@ export default function HomePage() {
     return (
         <>
             <body>
-                {/* <NavBarLogged /> */}
+               
                 <header><h1>LeagueName</h1></header>    
                 <ul className="nav_tab_cont">
                     <li className="TAB one">
